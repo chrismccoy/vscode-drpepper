@@ -1,0 +1,8 @@
+.vscode/**
+.vscode-test/**
+src/test/**
+.gitignore
+**/eslint.config.mjs
+images/*.svg
+**/.prettierrc.json
+**/.prettierignore

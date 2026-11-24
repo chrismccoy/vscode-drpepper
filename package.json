@@ -1,0 +1,131 @@
+{
+  "name": "vscode-drpepper",
+  "displayName": "DrPepper Ipsum",
+  "description": "Insert Dr Pepper ipsum placeholder text from the editor right-click menu",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.146.0"
+  },
+  "publisher": "chrismccoy",
+  "author": {
+    "name": "Chris McCoy"
+  },
+  "homepage": "https://github.com/chrismccoy/vscode-drpepper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrismccoy/vscode-drpepper"
+  },
+  "icon": "images/logo.png",
+  "keywords": [
+    "Dr Pepper",
+    "Ipsum",
+    "Lorem",
+    "Placeholder",
+    "Text"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-drpepper.paragraphs1",
+        "title": "1 paragraph",
+        "category": "DrPepper Ipsum"
+      },
+      {
+        "command": "vscode-drpepper.paragraphs3",
+        "title": "3 paragraphs",
+        "category": "DrPepper Ipsum"
+      },
+      {
+        "command": "vscode-drpepper.paragraphs5",
+        "title": "5 paragraphs",
+        "category": "DrPepper Ipsum"
+      },
+      {
+        "command": "vscode-drpepper.paragraphs10",
+        "title": "10 paragraphs",
+        "category": "DrPepper Ipsum"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "vscode-drpepper.submenu",
+        "label": "DrPepper Ipsum"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "vscode-drpepper.submenu",
+          "group": "1_modification",
+          "when": "!editorReadonly"
+        }
+      ],
+      "vscode-drpepper.submenu": [
+        {
+          "command": "vscode-drpepper.paragraphs1",
+          "group": "1_sizes@1"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs3",
+          "group": "1_sizes@2"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs5",
+          "group": "1_sizes@3"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs10",
+          "group": "1_sizes@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "vscode-drpepper.paragraphs1",
+          "when": "false"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs3",
+          "when": "false"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs5",
+          "when": "false"
+        },
+        {
+          "command": "vscode-drpepper.paragraphs10",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "pretest": "npm run lint",
+    "test": "node ./src/test/runTest.js",
+    "build": "vsce package --no-dependencies",
+    "install:extension": "npm run build && node -e \"const p=require('./package.json');require('child_process').execSync('code --install-extension '+p.name+'-'+p.version+'.vsix --force',{stdio:'inherit'})\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^4.1.1",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "mocha": "^12.0.3",
+    "prettier": "^3.10.1"
+  },
+  "overrides": {
+    "mocha": {
+      "glob": "^14.0.6",
+      "minimatch": "^11.0.9"
+    },
+    "@vscode/vsce": {
+      "minimatch": "^11.0.9"
+    }
+  }
+}
